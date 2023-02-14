@@ -8,15 +8,23 @@
   <div class="row">
     <div class="col-md-6">
       <h4>Upload file to be encrypted</h4>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <div class="form-group">
+          <label for="firstKey">First Key</label>
+          <input type="text" class="form-control" id="firstKey" name="firstKey" placeholder="First Key" >
         </div>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="onFileChanged($event)" >
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        <div class="form-group">
+          <label for="secondKey">Second Key</label>
+          <input type="email" class="form-control" id="secondKey" name="secondKey" placeholder="Second Key" >
+          <small>To enhance the strength of the encryption, this key can be comprised of multiple keys separated by commas. This allows for a more complex and robust encryption scheme that is harder to crack.</small>
         </div>
-      </div><br>
+        <div class="form-group">
+          <label for="file">File upload:</label>
+          <input type="file" class="form-control-file" id="file" name="file" (change)="onFileChanged($event)">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br>
       <button (click)="onDownload()" *ngIf="download" class="btn btn-primary">Download</button>
     </div>
     <div class="col-md-6">

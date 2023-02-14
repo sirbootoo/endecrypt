@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms'
 import * as fipamo from 'fipamo';
 import * as fuctbase64 from 'fuctbase64';
 import { saveAs } from 'file-saver';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 
-
-const fip = new fipamo('Secret key', ['array', 'of', 'keys.', 'Please', 'this', 'is', 'compulsory']);
 
 @Component({
   selector: 'app-root',
@@ -22,17 +21,26 @@ export class AppComponent {
   filename:any;
   readData:any;
   decrypted: boolean = false;
+  myForm: NgForm;
+
 
 
   onFileChanged(event) {
     let result = fuctbase64(event).then(result => {
       this.fileResult = result;
       console.log(this.fileResult);
-      let {base64, name, type} = this.fileResult
-      let data = {base64, name, type}
-      this.enc = fip.crypt(data)
-      this.download = true;
     });
+  }
+
+  onSubmit(){
+    const formData = new FormData();
+    const {firstKey, secondKey} = this.myForm.value
+    const secondKeyArr = secondKey.split(",");
+    let {base64, name, type} = this.fileResult
+    const fip = new fipamo(firstKey, secondKeyArr);
+    let data = {base64, name, type}
+    this.enc = fip.crypt(data)
+    this.download = true;
   }
 
   onDownload(){
