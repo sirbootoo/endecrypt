@@ -29,12 +29,8 @@ export class AppComponent {
 
   onFileChanged(event, isEncrypt) {
     fuctbase64(event).then(result => {
-      if(isEncrypt) {
-        this.fileResult = result;
-      } else {
-        this.fileResultDec = result;
-      }
-      console.log(this.fileResult,  this.fileResultDec);
+      this.fileResult = result;
+      console.log(this.fileResult);
     });
   }
 
