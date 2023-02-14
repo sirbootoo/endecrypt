@@ -57,12 +57,14 @@ export class AppComponent {
       let {base64, name, type} = file;
       console.log({base64, name, type}, secondKeyArr, "==============" )
       const fip = new fipamo(firstKey, secondKeyArr);
-      let data = {base64, name, type}
-      const payload = fip.crypt(data)
+      
       if(isEncrypt) {
+        let data = {base64, name, type}
+        const payload = fip.crypt(data)
         this.enc = payload;
         this.download = true;
       } else {
+        const payload = fip.crypt(file)
         this.readData = payload;
         this.decrypted = true;
       }
