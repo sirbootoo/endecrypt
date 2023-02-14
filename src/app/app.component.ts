@@ -49,7 +49,7 @@ export class AppComponent {
     if(!firstKey || !secondKey || !file) {
       alert("All fields are required.");
     } else {
-      const secondKeyArr = secondKey.split(",");
+      const secondKeyArr = secondKey.split(",").map(item => item.trim());
       let {base64, name, type} = file;
       console.log({base64, name, type}, secondKeyArr, "==============" )
       const fip = new fipamo(firstKey, secondKeyArr);
