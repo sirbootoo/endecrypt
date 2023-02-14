@@ -35,12 +35,16 @@ export class AppComponent {
   onSubmit(){
     const formData = new FormData();
     const {firstKey, secondKey} = this.myForm.value
-    const secondKeyArr = secondKey.split(",");
-    let {base64, name, type} = this.fileResult
-    const fip = new fipamo(firstKey, secondKeyArr);
-    let data = {base64, name, type}
-    this.enc = fip.crypt(data)
-    this.download = true;
+    if(!firstKey || !secondKey || !this.fileResult) {
+      alert("All fields are required.")
+    } else {
+      const secondKeyArr = secondKey.split(",");
+      let {base64, name, type} = this.fileResult
+      const fip = new fipamo(firstKey, secondKeyArr);
+      let data = {base64, name, type}
+      this.enc = fip.crypt(data)
+      this.download = true;
+    }
   }
 
   onDownload(){
