@@ -34,7 +34,7 @@ export class AppComponent {
       } else {
         this.fileResultDec = result;
       }
-      console.log(this.fileResult);
+      console.log(this.fileResult,  this.fileResultDec);
     });
   }
 
@@ -55,6 +55,7 @@ export class AppComponent {
     } else {
       const secondKeyArr = secondKey.split(",");
       let {base64, name, type} = file;
+      console.log({base64, name, type}, secondKeyArr )
       const fip = new fipamo(firstKey, secondKeyArr);
       let data = {base64, name, type}
       const payload = fip.crypt(data)
