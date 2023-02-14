@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <label for="file">File upload:</label>
-          <input type="file" class="form-control-file" id="file" name="file" (change)="onFileChanged($event)">
+          <input type="file" class="form-control-file" id="file" name="file" (change)="onFileChanged($event, true)">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -29,7 +29,7 @@
     </div>
     <div class="col-md-6">
       <h4>Upload file to be decrypted</h4>
-      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm, false)" >
+      <form #myFormDec="ngForm" (ngSubmit)="onSubmit(myFormDec, false)" >
         <div class="form-group">
           <label for="firstKeyDec">First Key</label>
           <input type="text"name="firstKeyDec" class="form-control" id="firstKeyDec" placeholder="First Key" ngModel required  />
@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
           <label for="file">File upload:</label>
-          <input type="file" class="form-control-file" id="file" name="file" (change)="onFileChanged($event)">
+          <input type="file" class="form-control-file" id="file" name="file" (change)="onFileChanged($event, false)">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

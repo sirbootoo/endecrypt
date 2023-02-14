@@ -23,6 +23,7 @@ export class AppComponent {
   readData:any;
   decrypted: boolean = false;
   myForm: NgForm;
+  myFormDec: NgForm;
 
 
 
