@@ -11,11 +11,11 @@
       <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" >
         <div class="form-group">
           <label for="firstKey">First Key</label>
-          <input type="text" class="form-control" id="firstKey" name="firstKey" placeholder="First Key" >
+          <input type="text"name="firstKey" class="form-control" id="firstKey" placeholder="First Key" >
         </div>
         <div class="form-group">
           <label for="secondKey">Second Key</label>
-          <input type="email" class="form-control" id="secondKey" name="secondKey" placeholder="Second Key" >
+          <input type="text" name="secondKey" class="form-control" id="secondKey" placeholder="Second Key" >
           <small>To enhance the strength of the encryption, this key can be comprised of multiple keys separated by commas. This allows for a more complex and robust encryption scheme that is harder to crack.</small>
         </div>
         <div class="form-group">

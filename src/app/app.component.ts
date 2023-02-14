@@ -36,7 +36,7 @@ export class AppComponent {
     console.log(form, "++++++++++++++ Form data ++++++++")
     const {firstKey, secondKey} = form.value
     if(!firstKey || !secondKey || !this.fileResult) {
-      alert("All fields are required.")
+      alert("All fields are required.");
     } else {
       const secondKeyArr = secondKey.split(",");
       let {base64, name, type} = this.fileResult
