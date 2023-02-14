@@ -15,6 +15,7 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 export class AppComponent {
   title = 'enDecrypt';
   fileResult: any;
+  fileResultDec: any;
   enc: any;
   download: boolean = false;
   file: any;
@@ -25,32 +26,44 @@ export class AppComponent {
 
 
 
-  onFileChanged(event) {
+  onFileChanged(event, isEncrypt) {
     let result = fuctbase64(event).then(result => {
-      this.fileResult = result;
+      if(isEncrypt) {
+        this.fileResult = result;
+      } else {
+        this.fileResultDec = result;
+      }
       console.log(this.fileResult);
     });
   }
 
   onSubmit(form, isEncrypt){
     console.log(form, "++++++++++++++ Form data ++++++++");
-    let firstKey, secondKey;
+    let firstKey, secondKey, file;
     if(isEncrypt) {
       firstKey = form.value.firstKey
       secondKey= form.value.secondKey
+      file = this.fileResult;
     } else {
       firstKey = form.value.firstKeyDec
       secondKey= form.value.secondKeyDec
+      file = this.fileResultDec;
     }
-    if(!firstKey || !secondKey || !this.fileResult) {
+    if(!firstKey || !secondKey || !file) {
       alert("All fields are required.");
     } else {
       const secondKeyArr = secondKey.split(",");
-      let {base64, name, type} = this.fileResult
+      let {base64, name, type} = file;
       const fip = new fipamo(firstKey, secondKeyArr);
       let data = {base64, name, type}
-      this.enc = fip.crypt(data)
-      this.download = true;
+      const payload = fip.crypt(data)
+      if(isEncrypt) {
+        this.enc = payload;
+        this.download = true;
+      } else {
+        this.readData = payload;
+        this.decrypted = true;
+      }
     }
   }
 
@@ -62,17 +75,17 @@ export class AppComponent {
     saveAs(file)
   }
 
-  decryptingFile(event){
-    const file = event.target.files[0]
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => {
-      console.log(fileReader.result);
-      const fip = new fipamo("firstKey", ["secondKeyArr"]);
-      this.readData = fip.crypt(fileReader.result)
-      this.decrypted = true;
-    }
-    fileReader.readAsText(file);
-  }
+  // decryptingFile(event){
+  //   const file = event.target.files[0]
+  //   let fileReader = new FileReader();
+  //   fileReader.onload = (e) => {
+  //     console.log(fileReader.result);
+  //     const fip = new fipamo("firstKey", ["secondKeyArr"]);
+  //     this.readData = fip.crypt(fileReader.result)
+  //     this.decrypted = true;
+  //   }
+  //   fileReader.readAsText(file);
+  // }
 
   downloadAfterDecrypting(){
     let {base64, name, type} = this.readData;
