@@ -32,9 +32,16 @@ export class AppComponent {
     });
   }
 
-  onSubmit(form){
-    console.log(form, "++++++++++++++ Form data ++++++++")
-    const {firstKey, secondKey} = form.value
+  onSubmit(form, isEncrypt){
+    console.log(form, "++++++++++++++ Form data ++++++++");
+    let firstKey, secondKey;
+    if(isEncrypt) {
+      firstKey = form.value.firstKey
+      secondKey= form.value.secondKey
+    } else {
+      firstKey = form.value.firstKeyDec
+      secondKey= form.value.secondKeyDec
+    }
     if(!firstKey || !secondKey || !this.fileResult) {
       alert("All fields are required.");
     } else {

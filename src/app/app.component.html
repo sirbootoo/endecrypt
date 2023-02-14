@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-md-6">
       <h4>Upload file to be encrypted</h4>
-      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" >
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm, true)" >
         <div class="form-group">
           <label for="firstKey">First Key</label>
           <input type="text"name="firstKey" class="form-control" id="firstKey" placeholder="First Key" ngModel required  />
@@ -29,15 +29,23 @@
     </div>
     <div class="col-md-6">
       <h4>Upload file to be decrypted</h4>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm, false)" >
+        <div class="form-group">
+          <label for="firstKeyDec">First Key</label>
+          <input type="text"name="firstKeyDec" class="form-control" id="firstKeyDec" placeholder="First Key" ngModel required  />
         </div>
-        <div class="custom-file">
-          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" (change)="decryptingFile($event)" >
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        <div class="form-group">
+          <label for="secondKeyDec">Second Key</label>
+          <input type="text" name="secondKeyDec" class="form-control" id="secondKeyDec" placeholder="Second Key" ngModel required />
+          <small>In order to decrypt the encrypted message, the key must be entered correctly. If the key is comprised of multiple keys, each key must be entered in the same order and separated by commas as it was when the message was encrypted. This will allow the decryption algorithm to access and use each component of the key to decrypt the message successfully.</small>
         </div>
-      </div><br>
+        <div class="form-group">
+          <label for="file">File upload:</label>
+          <input type="file" class="form-control-file" id="file" name="file" (change)="decryptingFile($event)">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <br>
       <button (click)="downloadAfterDecrypting()" *ngIf="decrypted" class="btn btn-primary">Download</button>
     </div>
   </div>
