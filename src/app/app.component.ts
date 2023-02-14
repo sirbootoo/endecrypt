@@ -60,6 +60,7 @@ export class AppComponent {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       console.log(fileReader.result);
+      const fip = new fipamo("firstKey", ["secondKeyArr"]);
       this.readData = fip.crypt(fileReader.result)
       this.decrypted = true;
     }
