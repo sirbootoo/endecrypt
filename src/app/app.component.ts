@@ -28,7 +28,7 @@ export class AppComponent {
 
 
   onFileChanged(event, isEncrypt) {
-    let result = fuctbase64(event).then(result => {
+    fuctbase64(event).then(result => {
       if(isEncrypt) {
         this.fileResult = result;
       } else {
@@ -77,17 +77,18 @@ export class AppComponent {
     saveAs(file)
   }
 
-  // decryptingFile(event){
-  //   const file = event.target.files[0]
-  //   let fileReader = new FileReader();
-  //   fileReader.onload = (e) => {
-  //     console.log(fileReader.result);
-  //     const fip = new fipamo("firstKey", ["secondKeyArr"]);
-  //     this.readData = fip.crypt(fileReader.result)
-  //     this.decrypted = true;
-  //   }
-  //   fileReader.readAsText(file);
-  // }
+  decryptingFile(event){
+    const file = event.target.files[0]
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);
+      this.fileResultDec = fileReader.result;
+      // const fip = new fipamo("firstKey", ["secondKeyArr"]);
+      // this.readData = fip.crypt(fileReader.result)
+      // this.decrypted = true;
+    }
+    fileReader.readAsText(file);
+  }
 
   downloadAfterDecrypting(){
     let {base64, name, type} = this.readData;
