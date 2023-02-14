@@ -91,6 +91,7 @@ export class AppComponent {
 
   downloadAfterDecrypting(){
     let {base64, name, type} = this.readData;
+    console.log(base64, "======== base64 =========")
     let file = this.dataURLtoFile(base64, name, type)
     saveAs(file);
   }
