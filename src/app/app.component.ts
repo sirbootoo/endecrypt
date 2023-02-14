@@ -32,10 +32,9 @@ export class AppComponent {
     });
   }
 
-  onSubmit(){
-    const formData = new FormData();
-    console.log(this.myForm, "++++++++++++++ Form data ++++++++")
-    const {firstKey, secondKey} = this.myForm.value
+  onSubmit(form){
+    console.log(form, "++++++++++++++ Form data ++++++++")
+    const {firstKey, secondKey} = form.value
     if(!firstKey || !secondKey || !this.fileResult) {
       alert("All fields are required.")
     } else {
