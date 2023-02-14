@@ -61,6 +61,7 @@ export class AppComponent {
         this.download = true;
       } else {
         const payload = fip.crypt(file)
+        console.log(payload, "========= Payload ==========")
         this.readData = payload;
         this.decrypted = true;
       }
