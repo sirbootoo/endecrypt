@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-md-6">
       <h4>Upload file to be encrypted</h4>
-      <form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" >
         <div class="form-group">
           <label for="firstKey">First Key</label>
           <input type="text" class="form-control" id="firstKey" name="firstKey" placeholder="First Key" >
